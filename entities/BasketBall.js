@@ -10,13 +10,9 @@ function BasketBall(myX, myY, rand, game, spritesheet) {
     this.width = 1100;
     this.height = 450;
 
-    if (rand === true){
-        this.x = myX;
-        this.y = myY;
-    } else {
-        this.x = 100;
-        this.y = 100;
-    }
+    this.x = myX;
+    this.y = myY;
+    
    
     this.velocityX = 10; 
     this.velocityY = 15;

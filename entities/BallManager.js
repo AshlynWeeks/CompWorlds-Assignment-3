@@ -1,5 +1,6 @@
 var balls = [];
 var randomBalls = [];
+var ballLength = 0;
 
 //inheritence
 BallManager.prototype = new Entity();
@@ -31,10 +32,9 @@ function BallManager(game) {
     //Left mouse click
     this.ctx.canvas.addEventListener("click", function (e) {
         that.click = getXandY(e);
-        console.log(e);
 
+        ballLength++;
         var random = Math.floor(Math.random() * 4); 
-        console.log(random);            
 
         switch(random) {
             
@@ -65,15 +65,16 @@ function BallManager(game) {
                     var bubble = new Bubble(0, 0, false, game, AM.getAsset("./img/Bubble.png"));
                     game.addEntity(bubble);
                     randomBalls.push(bubble);
-                    console.log("added bubble");
                  }
           }
+
+
+
     }, false);
 
     //Right mouse click
     this.ctx.canvas.addEventListener("contextmenu", function (e) {
         that.click = getXandY(e);
-        console.log(e);
         if(that.mousedown === 0){
             that.mousedown = 1;
         } else {
@@ -87,21 +88,22 @@ function BallManager(game) {
 
 BallManager.prototype.initBall = function () {
 
-    var myX = 0;
-    var myY = 0;
+    ballLength = 1;
+    var myX = 100;
+    var myY = 100;
     randomBalls[0] = new BasketBall(myX, myY, false, this.game, AM.getAsset("./img/basketball.png"));
-    randomBalls[1] = new TennisBall(myX, myY, false, this.game, AM.getAsset("./img/Tennis Ball.png"));
-    randomBalls[2] = new BowlingBall(myX, myY, false, this.game, AM.getAsset("./img/Bowling Ball.png"));
+    // randomBalls[1] = new TennisBall(myX, myY, false, this.game, AM.getAsset("./img/Tennis Ball.png"));
+    // randomBalls[2] = new BowlingBall(myX, myY, false, this.game, AM.getAsset("./img/Bowling Ball.png"));
 
     this.game.addEntity(randomBalls[0]);
-    this.game.addEntity(randomBalls[1]);
-    this.game.addEntity(randomBalls[2]);
+    // this.game.addEntity(randomBalls[1]);
+    // this.game.addEntity(randomBalls[2]);
 
-    for(var i = 0; i < 100; i++){
-        var mybubble = new Bubble(myX, myY, false, this.game, AM.getAsset("./img/Bubble.png"));
-        this.game.addEntity(mybubble);
-        randomBalls.push(mybubble);
-    }
+    // for(var i = 0; i < 100; i++){
+    //     var mybubble = new Bubble(myX, myY, false, this.game, AM.getAsset("./img/Bubble.png"));
+    //     this.game.addEntity(mybubble);
+    //     randomBalls.push(mybubble);
+    // }
 
 }
 
@@ -132,6 +134,7 @@ BallManager.prototype.update = function () {
         for(var i = 0; i < randomBalls.length; i++){
             if(randomBalls[i] instanceof BasketBall){
                 randomBalls[i].applyForce(0, 5);
+
             } else if (randomBalls[i] instanceof TennisBall){
                 randomBalls[i].applyForce(0, 2.5);
 
@@ -140,8 +143,13 @@ BallManager.prototype.update = function () {
 
             } 
         }
-
     }
 
 }
+
+document.addEventListener('mousemove', canvas.mouseHandler);
+document.addEventListener('touchstart', canvas.touchHandler);
+document.addEventListener('touchmove', canvas.touchHandler);
+
+
 
