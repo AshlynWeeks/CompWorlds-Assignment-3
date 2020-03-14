@@ -88,22 +88,24 @@ function BallManager(game) {
 
 BallManager.prototype.initBall = function () {
 
-    ballLength = 1;
     var myX = 100;
     var myY = 100;
     randomBalls[0] = new BasketBall(myX, myY, false, this.game, AM.getAsset("./img/basketball.png"));
-    // randomBalls[1] = new TennisBall(myX, myY, false, this.game, AM.getAsset("./img/Tennis Ball.png"));
-    // randomBalls[2] = new BowlingBall(myX, myY, false, this.game, AM.getAsset("./img/Bowling Ball.png"));
+    randomBalls[1] = new TennisBall(myX, myY, false, this.game, AM.getAsset("./img/Tennis Ball.png"));
+    randomBalls[2] = new BowlingBall(myX, myY, false, this.game, AM.getAsset("./img/Bowling Ball.png"));
 
     this.game.addEntity(randomBalls[0]);
-    // this.game.addEntity(randomBalls[1]);
-    // this.game.addEntity(randomBalls[2]);
+    this.game.addEntity(randomBalls[1]);
+    this.game.addEntity(randomBalls[2]);
 
-    // for(var i = 0; i < 100; i++){
-    //     var mybubble = new Bubble(myX, myY, false, this.game, AM.getAsset("./img/Bubble.png"));
-    //     this.game.addEntity(mybubble);
-    //     randomBalls.push(mybubble);
-    // }
+    for(var i = 0; i < 100; i++){
+        var mybubble = new Bubble(myX, myY, false, this.game, AM.getAsset("./img/Bubble.png"));
+        this.game.addEntity(mybubble);
+        randomBalls.push(mybubble);
+    }
+
+    ballLength = 103;
+
 
 }
 
